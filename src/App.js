@@ -10,16 +10,20 @@ class App extends Component {
     super(props)
     this.state = {
       searchTerm: '',
-      hintText: 'Hit enter to search'
+      hintText: 'Hit enter to search',
+      gif: null
     }
   }
 
   searchGiphy = async searchTerm => {
     try{
       const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=BZSuEcIZBvTD6pmaGiw3NPnvprn8qUah&q=${searchTerm}&limit=25&offset=0&rating=G&lang=en`);
-      const data = await response.json()
-      const gif =data[0];
-      
+      const {data} = await response.json();
+      const randomGif = data => {
+        const randIndex = Math.floor(Math.random() * data.length);
+        return data[randIndex];
+      }
+      this.setState({ gif: data[randomGif].images.original.mp4 })
     }
     catch(error) {}
   }
@@ -46,7 +50,8 @@ class App extends Component {
         <Search 
         presskey={this.handleKeyEvent}
         changed={this.handleChange}
-        search={this.state.searchTerm} />
+        search={this.state.searchTerm}
+        gif={this.state.gif} />
         <UserHint hinttxt={this.state.hintText} />
       </div>
     )
