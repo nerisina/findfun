@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => (
     <header className="">
-        <h1>Jifffffffffy Search</h1>
+        <h1>HI! Find FUN</h1>
     </header>
 )
 

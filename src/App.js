@@ -4,6 +4,11 @@ import Header from './Header';
 import Search from './Search';
 import UserHint from './UserHint';
 
+const generateRandGif = dataArr => {
+  const randIndex = Math.floor(Math.random() * dataArr.length);
+  return dataArr[randIndex];
+}
+
 class App extends Component {
 
   constructor(props){
@@ -11,19 +16,17 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       hintText: 'Hit enter to search',
-      gif: null
+      gif: null,
+      gifs: []
     }
   }
-
+ 
   searchGiphy = async searchTerm => {
     try{
       const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=BZSuEcIZBvTD6pmaGiw3NPnvprn8qUah&q=${searchTerm}&limit=25&offset=0&rating=G&lang=en`);
       const {data} = await response.json();
-      const randomGif = data => {
-        const randIndex = Math.floor(Math.random() * data.length);
-        return data[randIndex];
-      }
-      this.setState({ gif: data[randomGif].images.original.mp4 })
+      const randomGif = generateRandGif(data)
+      this.setState({ gif: randomGif})
     }
     catch(error) {}
   }
