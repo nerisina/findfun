@@ -1,9 +1,9 @@
 import React from 'react';
-// import loader from './images/loader.svg';
+import loader from './images/loader.svg';
 
-const UserHint = props => (
+const UserHint = (props) => (
     <div className="user-hint">
-       {props.hinttxt}
+       {props.loader ? <img src={loader} alt="Spinner" className="block mx-auto" /> : props.hinttxt}
     </div>
 )
 
