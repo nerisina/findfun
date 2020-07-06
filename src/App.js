@@ -26,7 +26,6 @@ class App extends Component {
   searchGiphy = async searchTerm => {
     this.setState({ loading: true })
     const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
-    console.log(API_KEY)
     try{
       const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${searchTerm}&limit=25&offset=0&rating=G&lang=en`);
       const {data} = await response.json();
